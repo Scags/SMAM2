@@ -1,0 +1,5 @@
+
+build/*
+dist/*
+src/smam/__pycache__/*
+src/SourceMod_Addon_Manager.egg-info/*

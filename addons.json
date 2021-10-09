@@ -1,0 +1,364 @@
+{
+	"sourcemod1-10":
+	{
+		"author": "AlliedModders",
+		"description": "SourceMod 1.10 install",
+		"version": "1.10",
+		"url":
+		{
+			"windows": "https://www.sourcemod.net/latest.php?os=windows&version=1.10",
+			"linux": "https://www.sourcemod.net/latest.php?os=linux&version=1.10",
+			"darwin": "https://www.sourcemod.net/latest.php?os=mac&version=1.10"
+		}
+	},
+	"sourcemod1-11":
+	{
+		"author": "AlliedModders",
+		"description": "SourceMod 1.11 install",
+		"version": "1.11",
+		"url":
+		{
+			"windows": "https://www.sourcemod.net/latest.php?os=windows&version=1.11",
+			"linux": "https://www.sourcemod.net/latest.php?os=linux&version=1.11",
+			"darwin": "https://www.sourcemod.net/latest.php?os=mac&version=1.11"
+		}
+	},
+	"metamod1-11":
+	{
+		"author": "AlliedModders",
+		"description": "MetaMod 1.11 install",
+		"version": "1.11",
+		"url":
+		{
+			"windows": "https://metamodsource.net/latest.php?os=windows&version=1.11",
+			"linux": "https://metamodsource.net/latest.php?os=linux&version=1.11",
+			"darwin": "https://metamodsource.net/latest.php?os=mac&version=1.11"
+		}
+	},
+	"metamod1-12":
+	{
+		"author": "AlliedModders",
+		"description": "MetaMod 1.12 install",
+		"version": "1.12",
+		"url":
+		{
+			"windows": "https://metamodsource.net/latest.php?os=windows&version=1.12",
+			"linux": "https://metamodsource.net/latest.php?os=linux&version=1.12",
+			"darwin": "https://metamodsource.net/latest.php?os=mac&version=1.12"
+		}
+	},
+	"tf2items":
+	{
+		"author": "Asherkin",
+		"description": null,
+		"version": "1.6.4-279",
+		"url":
+		{
+			"windows": "https://builds.limetech.io/files/tf2items-1.6.4-hg279-windows.zip",
+			"linux": "https://builds.limetech.io/files/tf2items-1.6.4-hg279-linux.zip",
+			"darwin": "https://builds.limetech.io/files/tf2items-1.6.4-hg279-mac.zip"
+		}
+	},
+	"connect":
+	{
+		"author": "Asherkin",
+		"description": "A safer OnClientPreConnect forward",
+		"version":
+		{
+			"windows": "1.2.0-39",
+			"linux": "1.2.0-38",
+			"darwin": "1.2.0-38"
+		},
+		"url":
+		{
+			"windows": "https://builds.limetech.io/files/connect-1.2.0-hg39-windows.zip",
+			"linux": "https://builds.limetech.io/files/connect-1.2.0-hg38-linux.zip",
+			"darwin": "https://builds.limetech.io/files/connect-1.2.0-hg38-mac.zip"
+		}
+	},
+	"dhooks":
+	{
+		"author": "Drifter, Peace-Maker",
+		"description": "Dynamic Hooks",
+		"version": "2.2.0-detours17",
+		"url": "https://forums.alliedmods.net/attachment.php?attachmentid=190123&d=1625050030"
+	},
+	"curl":
+	{
+		"author": "raydan",
+		"description": "URL transfer library",
+		"version": "1.3.0.0",
+		"url": 
+		{
+			"windows": "https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/sourcemod-curl-extension/curl_1.3.0.0.zip",
+			"linux": "https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/sourcemod-curl-extension/curl_1.3.0.0_linux.zip",
+			"darwin": "https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/sourcemod-curl-extension/curl_1.3.0.0_linux.zip"
+		}
+	},
+	"ripext":
+	{
+		"author": "DJ Tsunami",
+		"description": "HTTP client for JSON rest APIs",
+		"version": "1.3.1",
+		"url": 
+		{
+			"windows": "https://github.com/ErikMinekus/sm-ripext/releases/download/1.3.1/sm-ripext-1.3.1-windows.zip",
+			"linux": "https://github.com/ErikMinekus/sm-ripext/releases/download/1.3.1/sm-ripext-1.3.1-linux.zip",
+			"darwin": "https://github.com/ErikMinekus/sm-ripext/releases/download/1.3.1/sm-ripext-1.3.1-mac.zip"
+		}
+	},
+	"l4d2-bugfixes":
+	{
+		"author": "V10",
+		"description": "Fix bugs on L4D2 servers with more than 8 players",
+		"version": "1.0.2",
+		"url": "https://forums.alliedmods.net/attachment.php?attachmentid=123846&d=1375787396"
+	},
+	"sourcetvmanager":
+	{
+		"author": "Peace-Maker",
+		"description": "Interface to interact with the SourceTV server from SourcePawn",
+		"version": "1.1",
+		"url": "https://github.com/peace-maker/sourcetvmanager/releases/download/v1.1/sourcetvmanager_1.1.zip"
+	},
+	"collisionhook":
+	{
+		"author": "VoiDeD",
+		"description": "A straightforward and easy way to hook and modify collision rules between entities",
+		"version": "0.2",
+		"url": "https://web.archive.org/web/20200621213356/https://bbuseruploads.s3.amazonaws.com/VoiDeD/collisionhook/downloads/collisionhook-0.2.zip?Signature=tWT7y0Mudg%2F4X4kFUdeMGhLF6H4%3D&Expires=1592777036&AWSAccessKeyId=AKIA6KOSE3BNJRRFUUX6&versionId=null&response-content-disposition=attachment%3B%20filename%3D%22collisionhook-0.2.zip%22"
+	},
+	"l4d2-defibfix":
+	{
+		"author": "V10",
+		"description": "Fixes defibrillator re-revive clone bug (on servers higher than 8 players), also fix bug when survivor dead body teleports to clone origin and fix all clients linked animations",
+		"version": "1.0.1",
+		"url": "https://forums.alliedmods.net/attachment.php?attachmentid=122507&d=1373605628"
+	},
+	"accelerator":
+	{
+		"author": "Asherkin",
+		"description": "Crash reporting that doesn't suck",
+		"version": "1.0.12.5.0-cd575aa",
+		"url":
+		{
+			"windows": "https://builds.limetech.io/files/accelerator-2.5.0-git138-cd575aa-windows.zip",
+			"linux": "https://builds.limetech.io/files/accelerator-2.5.0-git138-cd575aa-linux.zip",
+			"darwin": "https://builds.limetech.io/files/accelerator-2.5.0-git138-cd575aa-linux.zip"
+		}
+	},
+	"vphysics":
+	{
+		"author": "Asherkin",
+		"description": "VPhysics interface for SourcePawn",
+		"version": "1.0.0-93",
+		"url":
+		{
+			"windows": "https://builds.limetech.io/files/vphysics-1.0.0-hg93-windows.zip",
+			"linux": "https://builds.limetech.io/files/vphysics-1.0.0-hg93-linux.zip",
+			"darwin": "https://builds.limetech.io/files/vphysics-1.0.0-hg93-mac.zip"
+		}
+	},
+	"left4fix":
+	{
+		"author": "spumer",
+		"description": "extension for Left 4 Dead 2 servers with extra player slots",
+		"version": "2.1.0",
+		"url": "https://github.com/spumer/Left4Fix/archive/refs/tags/v2.1.0.zip"
+	},
+	"system2":
+	{
+		"author": "dordnung",
+		"description": "allows you to easily make HTTP, HTTPS and FTP requests and also provides some useful system natives, which are missing in the Sourcemod API",
+		"version": "3.3.2",
+		"zipped": false,
+		"pathprepend": "extensions/",
+		"url":
+		{
+			"windows": "https://github.com/dordnung/System2/releases/download/v3.3.2/system2.ext.dll",
+			"linux": "https://github.com/dordnung/System2/releases/download/v3.3.2/system2.ext.so",
+			"darwin": "https://github.com/dordnung/System2/releases/download/v3.3.2/system2.ext.so"
+		}
+	},
+	"filenetmessages":
+	{
+		"author": "dordnung",
+		"description": "two little functions to send a file to a client and request a file from a client",
+		"version": "1.0",
+		"pathprepend": "extensions/",
+		"url": "https://forums.alliedmods.net/attachment.php?attachmentid=129589&d=1410976341"
+	},
+	"latedl":
+	{
+		"author": "Backup",
+		"description": "allows file transfers to players that are already in the game",
+		"version": "1.0.2.0",
+		"url": "https://github.com/jonatan1024/latedl/releases/download/1.0.2.0/latedl.zip"
+	},
+	"socket":
+	{
+		"author": "sfPlayer, JoinedSenses",
+		"description": "provides networking functionality for SourceMod scripts",
+		"version": "0.2",
+		"zipped": false,
+		"pathprepend": "extensions/",
+		"url":
+		{
+			"windows": "https://github.com/JoinedSenses/sm-ext-socket/releases/download/v0.2/socket.ext.dll",
+			"linux": "https://github.com/JoinedSenses/sm-ext-socket/releases/download/v0.2/socket.ext.so",
+			"darwin": "https://github.com/JoinedSenses/sm-ext-socket/releases/download/v0.2/socket.ext.so"
+		}
+	},
+	"antidll":
+	{
+		"author": "JDW",
+		"description": "a small extension capable of detecting cheats at an early stage and eliminating a dishonest player",
+		"version": "1.4",
+		"url":
+		{
+			"windows": "https://github.com/JDW1337/AntiDLL/releases/download/1.4/AntiDLL-sm1.10-win-b30653a.zip",
+			"linux": "https://github.com/JDW1337/AntiDLL/releases/download/1.4/AntiDLL-sm1.10-linux-b30653a.zip",
+			"darwin": "https://github.com/JDW1337/AntiDLL/releases/download/1.4/AntiDLL-sm1.10-linux-b30653a.zip"
+		}
+	},
+	"steamworks":
+	{
+		"author": "KyleS",
+		"description": "exposes SteamWorks to SourcePawn",
+		"version": "1.2.3c",
+		"url":
+		{
+			"linux": "https://github.com/KyleSanderson/SteamWorks/releases/download/1.2.3c/package-lin.tgz",
+			"darwin": "https://github.com/KyleSanderson/SteamWorks/releases/download/1.2.3c/package-mac.tgz"
+		}
+	},
+	"smjansson":
+	{
+		"author": "Thrawn2",
+		"description": "this extension wraps Jansson, a C library for encoding, decoding and manipulating JSON data",
+		"version": "2.3.1.3",
+		"pathprepend": "extensions/",
+		"url": "https://forums.alliedmods.net/attachment.php?attachmentid=105507&d=1340554215"
+	},
+	"left4downtown":
+	{
+		"author": "Downtown1, ProdigySim",
+		"description": "unlock maximum players slots ( up to 18*) in Left 4 Dead 1/2, also provide some new developer functionality",
+		"version": "0.5.4.2",
+		"zipped": false,
+		"url":
+		{
+			"extensions/":
+			{
+				"linux": "https://forums.alliedmods.net/attachment.php?attachmentid=70562&d=1280077009",
+				"darwin": "https://forums.alliedmods.net/attachment.php?attachmentid=70562&d=1280077009",
+				"windows": "https://forums.alliedmods.net/attachment.php?attachmentid=70561&d=1280076998"
+			},
+			"scripting/include/": "https://forums.alliedmods.net/attachment.php?attachmentid=70564&d=1280077035",
+			"gamedata/": "https://forums.alliedmods.net/attachment.php?attachmentid=70604&d=1280127112"
+		}
+	},
+	"left4downtown2":
+	{
+		"author": "ProdigySim",
+		"description": "L4D2-only continuation of Downtown1's Left 4 Dead extension",
+		"version": "0.5.4.2",
+		"url": "https://forums.alliedmods.net/attachment.php?attachmentid=111240&d=1350927410"
+	},
+	"left4downtown2-playerslots":
+	{
+		"author": "ProdigySim",
+		"description": "L4D2-only continuation of Downtown1's Left 4 Dead extension",
+		"version": "0.5.4.2",
+		"url": "https://forums.alliedmods.net/attachment.php?attachmentid=111241&d=1350927414"
+	},
+	"cleaner":
+	{
+		"author": "Zephyrus",
+		"description": "to hide DataTable and CreateFragmentsFromFile errors",
+		"version": "2012.12.29",
+		"url": "https://forums.alliedmods.net/attachment.php?attachmentid=111596&d=1351538952"
+	},
+	"sourcescramble":
+	{
+		"author": "nosoop",
+		"description": "an easy way for plugins to validate and patch platform-specific address locations with a game configuration file",
+		"version": "0.7.0",
+		"url": 
+		{
+			"windows": "https://github.com/nosoop/SMExt-SourceScramble/releases/download/0.7.0/package.zip",
+			"linux": "https://github.com/nosoop/SMExt-SourceScramble/releases/download/0.7.0/package.tar.gz",
+			"darwin": "https://github.com/nosoop/SMExt-SourceScramble/releases/download/0.7.0/package.tar.gz"
+		}
+	},
+	"sm-memory":
+	{
+		"author": "Scag",
+		"description": "exposes more memory functions to SourcePawn plugins",
+		"version": "1.3.0",
+		"url": 
+		{
+			"windows": "https://github.com/Scags/SM-Memory/releases/download/V1.3/package.zip",
+			"linux": "https://github.com/Scags/SM-Memory/releases/download/V1.3/package.tar.gz",
+			"darwin": "https://github.com/Scags/SM-Memory/releases/download/V1.3/package.tar.gz"
+		}
+	},
+	"steamtools":
+	{
+		"author": "Asherkin",
+		"description": "gives access to a select few SteamWorks functions for SourceMod plugins",
+		"version": "0.10.0-54fdc51",
+		"url": 
+		{
+			"windows": "https://builds.limetech.io/files/steamtools-0.10.0-git179-54fdc51-windows.zip",
+			"linux": "https://builds.limetech.io/files/steamtools-0.10.0-git179-54fdc51-linux.zip",
+			"darwin": "https://builds.limetech.io/files/steamtools-0.10.0-git179-54fdc51-linux.zip"
+		}
+	},
+	"vsh2":
+	{
+		"author": "Nergal",
+		"description": "VSH2 is a rewrite of the original VSH, meant to combine the best of VSH and FF2.",
+		"version": "2.12.0",
+		"url": "https://github.com/VSH2-Devs/Vs-Saxton-Hale-2/archive/refs/heads/develop.zip",
+		"exclude":
+		[
+			"*saxtonhale.smx",
+			"*freak_fortress_2.smx"
+		],
+		"required":
+		[
+			"tf2items"
+		]
+	},
+	"vsh2-ff2comp":
+	{
+		"author": "Nergal",
+		"description": "VSH2 is a rewrite of the original VSH, meant to combine the best of VSH and FF2.",
+		"version": "2.12.0",
+		"url": "https://github.com/VSH2-Devs/Vs-Saxton-Hale-2/archive/refs/heads/develop.zip",
+		"exclude":
+		[
+			"*saxtonhale.smx"
+		],
+		"required":
+		[
+			"tf2items"
+		]
+	},
+	"vsh2-vshcomp":
+	{
+		"author": "Nergal",
+		"description": "VSH2 is a rewrite of the original VSH, meant to combine the best of VSH and FF2.",
+		"version": "2.12.0",
+		"url": "https://github.com/VSH2-Devs/Vs-Saxton-Hale-2/archive/refs/heads/develop.zip",
+		"exclude":
+		[
+			"*freak_fortress_2.smx"
+		],
+		"required":
+		[
+			"tf2items"
+		]
+	}
+}
