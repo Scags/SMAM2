@@ -176,7 +176,7 @@ optional arguments:
 [scag@localhost ~]$ smam install -s 1 steamworks
 [scag@localhost ~]$ smam install vsh2 -o
 [scag@localhost ~]$ smam install sourcemod1-11 -nf -s 1-4
-[scag@localhost ~]$ smam install -Fmyplugins.txt 1,4
+[scag@localhost ~]$ smam install -Fmyplugins.txt -s1,4
 ```
 
 Removing an addon:
