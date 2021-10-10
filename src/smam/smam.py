@@ -101,7 +101,8 @@ class SMAM(object):
 		return [Server.fromconf(int(k), v) for k, v in serverdict.items()]
 
 	def _addons(self):
-		content = requests.get("https://brewcrew.tf/smam/addons.json").content
+		content = requests.get(
+			"https://raw.githubusercontent.com/Scags/SMAM2/main/addons.json").content
 		if content is None:
 			print(f"{helpers.colors.FAIL}Failed to download addon information.{helpers.colors.ENDC}")
 			exit(1)
