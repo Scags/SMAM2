@@ -111,13 +111,13 @@ You have 2 options from here.
 
 If you run a single server or you have a single user running multiple servers, you would use:
 ```sh
-[scag@localhost ~]$ pip3 install .
+[scag@localhost ~/SMAM2]$ pip3 install .
 ```
-You may also need to add the local bin dir to PATH. This installs SMAM so that you won't need to escalate to manage a server, but you would not be able to manage multiple servers at once.
+You may also need to add the local bin dir to PATH. This installs SMAM so that you won't need to escalate to manage a server, but if you are running servers under different users, SMAM will be confused if you try to run it under a different user than the one you installed with.
 
 Otherwise, if you are running multiple servers on the same machine under different users, you may want to install to the /usr/bin directory as `sudo`. This would mean using:
 ```sh
-[scag@localhost ~]$ sudo python3 setup.py install
+[scag@localhost ~/SMAM2]$ sudo python3 setup.py install
 ```
 
 From then on, you would have to run `smam` as root, but you would be able to harness SMAM's ability configure multiple servers at once.
