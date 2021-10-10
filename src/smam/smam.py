@@ -26,6 +26,33 @@ class Server(object):
 	def name(self):
 		return self._name or ""
 
+	def remove_addon(self, addonstr):
+		# Folders go last
+		removefiles = self.addons[addonstr]["content"]
+		removefolders = []
+		for u in range(len(removefiles)-1, -1, -1):
+			if removefiles[u][-1] == "/":
+				removefolders.append(removefiles.pop(u))
+
+		removefolders.sort(key=lambda x: len(x), reverse=True)
+		removables = removefiles + removefolders
+		for path in removables:
+			if not os.path.exists(path):
+				print(
+					f"{helpers.colors.WARNING}Addon \"{addonstr}\" {'file' if path[-1] != '' else 'folder'} \"{path}\" does not exist in server #{self.index} ({self.name}). Skipping...{helpers.colors.ENDC}")
+			else:
+				if os.path.isdir(path):
+					if len(os.listdir(path)) == 0 and not path.endswith("addons/"):
+						os.rmdir(path)
+					else:
+						print(
+							f"{helpers.colors.WARNING}Addon \"{addonstr}\" folder \"{path}\" from server #{self.index} ({self.name}) is not empty. Skipping...{helpers.colors.ENDC}")
+						continue
+				else:
+					os.remove(path)
+				print(
+					f"{helpers.colors.OKCYAN}Removing addon \"{addonstr}\" {'file' if path[-1] != '' else 'folder'} \"{path}\" from server #{self.index} ({self.name}).{helpers.colors.ENDC}")
+
 
 class Addon(object):
 	def __init__(self, name, node):
@@ -106,6 +133,8 @@ class SMAM(object):
 		               action="store_true", dest="force")
 		p.add_argument("-o", "--optional", help="install addon's optional packages",
 		               action="store_true", dest="optional")
+		p.add_argument("-F", "--file", help="read addons from a file",
+		               type=argparse.FileType('r'), dest="file")
 		args, candidates = p.parse_known_args(sys.argv[2:])
 
 		servers = self._servers()
@@ -132,8 +161,15 @@ class SMAM(object):
 			serverinstalls = servers
 
 		addons = self._addons()
+
+		if args.file is not None:
+			candidates.extend(args.file.read().split("\n"))
+
 		# ._.
 		for s in candidates:
+			if not len(s):
+				continue
+
 			if s not in addons.keys():
 				print(
 					f"{helpers.colors.WARNING}Installation candidate {s} does not exist and will be skipped.{helpers.colors.ENDC}")
@@ -185,7 +221,7 @@ class SMAM(object):
 					else:
 						if os.path.exists(path) and not (args.upgrade or args.force):
 							print(
-								f"{helpers.colors.WARNING}File \"{path}\" already exists in server #{serverinstalls[i].index} ({serverinstalls[i].name}). Skipping...\nTo override, use the \"force\" command (-f, --force).{helpers.colors.ENDC}")
+								f"{helpers.colors.WARNING}File \"{path}\" already exists in server #{serverinstalls[i].index} ({serverinstalls[i].name}). Skipping...{helpers.colors.ENDC}")
 							failures += 1
 						else:
 							with open(path, "wb") as f:
@@ -196,7 +232,7 @@ class SMAM(object):
 
 				if written:
 					print(
-						f"{helpers.colors.OKCYAN}Successfully added addon {addon.name} to server #{serverinstalls[i].index} ({serverinstalls[i].name}).{helpers.colors.ENDC}")
+						f"{helpers.colors.OKCYAN}Successfully installed addon {addon.name} to server #{serverinstalls[i].index} ({serverinstalls[i].name}).{helpers.colors.ENDC}")
 				if pathfails:
 					s = "" if pathfails == 1 else "s"
 					print(
@@ -246,42 +282,31 @@ class SMAM(object):
 			serverinstalls = servers
 
 		for addon in removals:
+			removeall = addon == "all"
 			for i in range(len(serverinstalls)):
-				if not serverinstalls[i].owns(addon):
+				if not removeall and not serverinstalls[i].owns(addon):
 					print(
 						f"{helpers.colors.WARNING}Server #{serverinstalls[i].index} ({serverinstalls[i].name}) does not own addon {addon}. Skipping...{helpers.colors.ENDC}")
 					continue
 
 				if not getattr(args, "keep", False):
-					# Folders go last
-					removefiles = serverinstalls[i].addons[addon]["content"]
-					removefolders = []
-					for u in range(len(removefiles)-1, -1, -1):
-						if removefiles[u][-1] == "/":
-							removefolders.append(removefiles.pop(u))
+					if removeall:
+						for key in serverinstalls[i].addons.keys():
+							serverinstalls[i].remove_addon(key)
+					else:
+						serverinstalls[i].remove_addon(addon)
 
-					removefolders.sort(key=lambda x: len(x), reverse=True)
-					removables = removefiles + removefolders
-					for path in removables:
-						if not os.path.exists(path):
-							print(
-								f"{helpers.colors.WARNING}Addon \"{addon}\" {'file' if path[-1] != '' else 'folder'} \"{path}\" does not exist in server #{serverinstalls[i].index} ({serverinstalls[i].name}). Skipping...{helpers.colors.ENDC}")
-						else:
-							if os.path.isdir(path):
-								if len(os.listdir(path)) == 0 and not path.endswith("addons/"):
-									os.rmdir(path)
-								else:
-									print(
-										f"{helpers.colors.WARNING}Addon \"{addon}\" folder \"{path}\" from server #{serverinstalls[i].index} ({serverinstalls[i].name}) is not empty. Skipping...{helpers.colors.ENDC}")
-									continue
-							else:
-								os.remove(path)
-							print(
-								f"{helpers.colors.OKCYAN}Removing addon \"{addon}\" {'file' if path[-1] != '' else 'folder'} \"{path}\" from server #{serverinstalls[i].index} ({serverinstalls[i].name}).{helpers.colors.ENDC}")
+				if removeall:
+					print(
+						f"{helpers.colors.OKCYAN}Successfully removed all addons from server #{serverinstalls[i].index} ({serverinstalls[i].name}).{helpers.colors.ENDC}")
+				else:
+					print(
+						f"{helpers.colors.OKCYAN}Successfully removed addon {addon} from server #{serverinstalls[i].index} ({serverinstalls[i].name}).{helpers.colors.ENDC}")
 
-				print(
-					f"{helpers.colors.OKCYAN}Successfully removed addon {addon} from server #{serverinstalls[i].index} ({serverinstalls[i].name}).{helpers.colors.ENDC}")
-				del serverinstalls[i].addons[addon]
+				if removeall:
+					serverinstalls[i].addons = {}
+				else:
+					del serverinstalls[i].addons[addon]
 
 		# Clean up this list so we can dump new addon data
 		for i in range(len(serverinstalls)):
