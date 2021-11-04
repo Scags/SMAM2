@@ -173,6 +173,9 @@ def collect(addon, exclusions: list) -> dict:
 
 
 def addpackages(addon, requiredlist: list, installs: list, addons) -> None:
+	if not isinstance(requiredlist, list):
+		requiredlist = [requiredlist]
+
 	for required in requiredlist:
 		if required not in [a.name for a in installs]:
 			print(f"\"{addon.name}\" requires addon \"{required}\". Adding to queue.")

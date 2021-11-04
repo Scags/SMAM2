@@ -263,6 +263,92 @@ optional arguments:
   -h, --help  show this help message and exit
 ```
 
+# Adding an Addon
+
+Created a plugin? Add it! I encourage everyone to add their projects to this repo.
+
+You can create subkeys for "linux", "windows", or "darwin" at any position in the config to differentiate between OSes. SMAM can figure it out for you. All entries are optional except for `url`.
+
+Addon configuration is as follows:
+
+- `author`
+  - You!
+- `description`
+  - Description of your plugin/extension.
+- `version`
+  - Version of your addon.
+- `url`
+  - URL of the addon.
+  - This can either be a string or a dict of prepended paths to prepend to the installation files. See `pathprepend`.
+- `zipped`
+  - If the URL leads to a file that is not a zipped folder or tarball, set to "false".
+  - Already true by default.
+- `exclude`
+  - If necessary, add files/folders to ignore during installation.
+  - Hidden and Markdown files are ignored globally.
+- `required`
+  - If your plugin requires a plugin or extension, you can add its name in an array/list.
+  - The name is the same as the root addon node.
+- `optional`
+  - If your plugin has optional dependencies, you can list them in an array/list.
+- `pathprepend`
+  - Sometimes SMAM can't figure out where a files are supposed to go.
+  - For example: if the URL points to a .smx, prepending "plugins/" to the file path would allow SMAM to follow addons/sourcemod/plugins and extract the plugin correctly.
+
+<details><summary>Example addons:</summary>
+
+```json
+  "left4downtown":
+	{
+		"author": "Downtown1, ProdigySim",
+		"description": "unlock maximum players slots ( up to 18*) in Left 4 Dead 1/2, also provide some new developer functionality",
+		"version": "0.5.4.2",
+		"zipped": false,
+		"url":
+		{
+			"extensions/":
+			{
+				"linux": "https://forums.alliedmods.net/attachment.php?attachmentid=70562&d=1280077009",
+				"darwin": "https://forums.alliedmods.net/attachment.php?attachmentid=70562&d=1280077009",
+				"windows": "https://forums.alliedmods.net/attachment.php?attachmentid=70561&d=1280076998"
+			},
+			"scripting/include/": "https://forums.alliedmods.net/attachment.php?attachmentid=70564&d=1280077035",
+			"gamedata/": "https://forums.alliedmods.net/attachment.php?attachmentid=70604&d=1280127112"
+		}
+	},
+  "socket":
+	{
+		"author": "sfPlayer, JoinedSenses",
+		"description": "provides networking functionality for SourceMod scripts",
+		"version": "0.2",
+		"zipped": false,
+		"pathprepend": "extensions/",
+		"url":
+		{
+			"windows": "https://github.com/JoinedSenses/sm-ext-socket/releases/download/v0.2/socket.ext.dll",
+			"linux": "https://github.com/JoinedSenses/sm-ext-socket/releases/download/v0.2/socket.ext.so",
+			"darwin": "https://github.com/JoinedSenses/sm-ext-socket/releases/download/v0.2/socket.ext.so"
+		}
+	},
+  "vsh2":
+	{
+		"author": "Nergal",
+		"description": "VSH2 is a rewrite of the original VSH, meant to combine the best of VSH and FF2.",
+		"version": "2.12.0",
+		"url": "https://github.com/VSH2-Devs/Vs-Saxton-Hale-2/archive/refs/heads/develop.zip",
+		"exclude":
+		[
+			"*saxtonhale.smx",
+			"*freak_fortress_2.smx"
+		],
+		"required":
+		[
+			"tf2items"
+		]
+	},
+```
+</details>
+
 # TODO
 
 - Allow complete server deletion.
