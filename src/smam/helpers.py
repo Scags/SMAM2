@@ -118,9 +118,9 @@ def discern_writepaths(path: str, filedict: dict, prepend: str) -> list:
 	return paths, pathfails
 
 
-def exclude(filedict: dict, exclude: list):
+def exclude(filedict: dict, exclude: list, exclusions: list) -> None:
 	for path in list(filedict.keys()):
-		for ex in EXCLUSIONS:
+		for ex in exclusions:
 			if fnmatch.fnmatch(path, ex):
 				del filedict[path]
 				continue
@@ -162,11 +162,11 @@ def osnode(d: dict):
 	return d.get(platform.system().lower(), None) or d
 
 
-def collect(addon) -> dict:
+def collect(addon, exclusions: list) -> dict:
 	if addon.zipped:
 		z = get_zip(addon.url)
 		filedict = zip2dict(z)
-		exclude(filedict, addon.exclude)
+		exclude(filedict, addon.exclude, exclusions)
 	else:
 		filedict = get_files(addon.url)
 	return filedict
@@ -177,4 +177,3 @@ def addpackages(addon, requiredlist: list, installs: list, addons) -> None:
 		if required not in [a.name for a in installs]:
 			print(f"\"{addon.name}\" requires addon \"{required}\". Adding to queue.")
 			installs.append(addons[required])
-

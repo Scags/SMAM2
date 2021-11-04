@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as f:
 
 setuptools.setup(
 	name="SourceMod-Addon-Manager",
-	version="1.0.0.1",
+	version="1.1.0.3",
 	author="Scag",
 	author_email="johnmascagni@gmail.com",
 	description="Automatic installer for SourceMod plugins and extensions",

@@ -77,7 +77,21 @@ Setting up addons in the main database is easily configurable. Each subkey in th
 
 Config can exclude files, prepend to file paths to configure installation directories, and include required and optionally required dependencies.
 
-Each server installation data is set up in the user's home data directory, `~/.local/share/smam/` for Unix and `C:\Users\<you>\AppData\Local\smam\` for Windows.
+Each server's installation data is set up in the user's home data directory, `~/.local/share/smam/` for Unix and `C:\Users\<you>\AppData\Local\smam\` for Windows.
+
+When installing an addon, the default behavior is pulling from the latest database file in the repo (addons.json). If you want to override this and use your own addons database. Open up the config directory and open `config.json` (which will only exist after running SMAM for the first time) and set "local" to true:
+```json
+{
+    "local": false,
+    // You can also change which files are ignored during installation
+    "file_exclusions": [
+        "*/.*",
+        "*.md"
+    ]
+}
+```
+
+After doing so, SMAM will pull from a/the addons.json in the config directory. If this file does not exist upon running any SMAM command that requires the addons database, it will simply download the latest addons.json, write it to your config directory, and proceed to use that file until you run `smam update`.
 
 # Installation #
 
@@ -238,8 +252,19 @@ optional arguments:
 [scag@localhost ~]$ smam info tf2items
 ```
 
+Update the local addon database (only required if you've edited to config to use a local addon file)
+```
+[scag@localhost ~]$ smam update -h
+usage: smam [-h]
+
+Update addons.json to the latest version. Only useful if config key "local" is set to True
+
+optional arguments:
+  -h, --help  show this help message and exit
+```
+
 # TODO
 
 - Allow complete server deletion.
-- Allow local addon database configurations
+- ~~Allow local addon database configurations~~ Implemented in V1.1
 - Improve argparse's command structure

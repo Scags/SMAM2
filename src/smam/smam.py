@@ -57,8 +57,8 @@ class Server(object):
 class Addon(object):
 	def __init__(self, name, node):
 		self.name = name
+		self.dict = node
 		self.url = helpers.osnode(node["url"])
-
 		self.author = node.get("author", "")
 		self.version = helpers.osnode(node.get("version", ""))
 		self.description = node.get("description", "")
@@ -82,16 +82,17 @@ class SMAM(object):
 			p.print_help()
 			return
 
+		# Update config in case this is a first-time thing
+		self._config(True)
+
 		getattr(self, args.command)()
 
 	def _servers(self):
 		os.makedirs(appdirs.user_data_dir("smam"), exist_ok=True)
 
 		if not os.path.exists(os.path.join(appdirs.user_data_dir("smam"), "servers.json")):
-			servers = open(os.path.join(
-				appdirs.user_data_dir("smam"), "servers.json"), "w")
-			servers.write("{}")
-			servers.close()
+			with open(os.path.join(appdirs.user_data_dir("smam"), "servers.json"), "w") as f:
+				f.write("{}")
 
 		servers = open(os.path.join(
 			appdirs.user_data_dir("smam"), "servers.json"), "r")
@@ -100,12 +101,21 @@ class SMAM(object):
 		servers.close()
 		return [Server.fromconf(int(k), v) for k, v in serverdict.items()]
 
-	def _addons(self):
-		content = requests.get(
-			"https://raw.githubusercontent.com/Scags/SMAM2/main/addons.json").content
-		if content is None:
-			print(f"{helpers.colors.FAIL}Failed to download addon information.{helpers.colors.ENDC}")
-			exit(1)
+	def _addons(self, local=False):
+		if not local or not os.path.exists(os.path.join(appdirs.user_data_dir("smam"), "addons.json")):
+			content = requests.get(
+				"https://raw.githubusercontent.com/Scags/SMAM2/main/addons.json").content
+			if content is None:
+				print(f"{helpers.colors.FAIL}Failed to download addon information.{helpers.colors.ENDC}")
+				exit(1)
+
+			if local:
+				with open(os.path.join(appdirs.user_data_dir("smam"), "addons.json"), "wb") as f:
+					f.write(content)
+
+		else:
+			with open(os.path.join(appdirs.user_data_dir("smam"), "addons.json"), "r") as f:
+				content = f.read()
 
 		j = json.loads(content)
 		return {name: Addon(name, node) for name, node in j.items()}
@@ -121,6 +131,27 @@ class SMAM(object):
 
 		with open(os.path.join(appdirs.user_data_dir("smam"), "servers.json"), "w") as f:
 			json.dump(j, f, indent=4)
+
+	def _config(self, create=False):
+		os.makedirs(appdirs.user_data_dir("smam"), exist_ok=True)
+
+		if not os.path.exists(os.path.join(appdirs.user_data_dir("smam"), "config.json")):
+			with open(os.path.join(appdirs.user_data_dir("smam"), "config.json"), "w") as f:
+				j = {
+					"local": False,
+					"file_exclusions": helpers.EXCLUSIONS
+				}
+				json.dump(j, f, indent=4)
+
+		if create:
+			return None
+
+		config = open(os.path.join(
+			appdirs.user_data_dir("smam"), "config.json"), "r")
+
+		j = json.load(config)
+		config.close()
+		return j
 
 	def install(self):
 		p = argparse.ArgumentParser(description="install a plugin/extension")
@@ -139,6 +170,7 @@ class SMAM(object):
 		args, candidates = p.parse_known_args(sys.argv[2:])
 
 		servers = self._servers()
+		config = self._config()
 		if not len(servers):
 			print(
 				f"{helpers.colors.WARNING}No known servers exist. Add them with \"smam add [path/to/gamedir]\".{helpers.colors.ENDC}")
@@ -161,7 +193,7 @@ class SMAM(object):
 			# If they didn't pass an explicit server, install to all of them
 			serverinstalls = servers
 
-		addons = self._addons()
+		addons = self._addons(config.get("local", False))
 
 		if args.file is not None:
 			candidates.extend(args.file.read().split("\n"))
@@ -194,7 +226,7 @@ class SMAM(object):
 
 		for addon in installs:
 			print(f"Collecting {addon.name}")
-			filedict = helpers.collect(addon)
+			filedict = helpers.collect(addon, config.get("file_exclusions", helpers.EXCLUSIONS))
 
 			for i in range(len(serverinstalls)):
 				if serverinstalls[i].owns(addon.name) and not (args.upgrade or args.force):
@@ -326,7 +358,8 @@ class SMAM(object):
 			print(f"{helpers.colors.FAIL}Usage: \"smam list <addon>\".{helpers.colors.ENDC}")
 			return
 
-		addons = self._addons()
+		config = self._config()
+		addons = self._addons(config.get("local", False))
 		if addon[0] not in addons:
 			print(
 				f"{helpers.colors.FAIL}Failed to locate addon \"{addon[0]}\". Try searching for it with \"smam search\".{helpers.colors.ENDC}")
@@ -342,7 +375,8 @@ class SMAM(object):
 
 		addon = addon[0]
 
-		addons = self._addons()
+		config = self._config()
+		addons = self._addons(config.get("local", False))
 		addonstr = []
 
 		if addon in addons:
@@ -357,9 +391,6 @@ class SMAM(object):
 
 		for a in addonstr:
 			print(a)
-
-	def update(self):
-		raise NotImplementedError("Command \"update\" is not implemented.")
 
 	def list(self):
 		p = argparse.ArgumentParser(description="list server(s) and their addons")
@@ -466,7 +497,7 @@ class SMAM(object):
 
 	def drop(self):
 		p = argparse.ArgumentParser(description="drop server(s) from SMAM")
-		args, todrop = p.parse_known_args(sys.argv[2:])
+		_, todrop = p.parse_known_args(sys.argv[2:])
 
 		servers = self._servers()
 		droppedservers = []
@@ -506,6 +537,21 @@ class SMAM(object):
 		if len(droppedindices):
 			print(
 				f"{helpers.colors.OKCYAN}Successfully dropped server{'s' if len(droppedindices) != 1 else ''} #{[s for s in droppedindices]}.{helpers.colors.ENDC}")
+
+	def update(self):
+		p = argparse.ArgumentParser(
+			description="Update addons.json to the latest version. Only useful if config key \"local\" is set to True")
+		_, _ = p.parse_known_args(sys.argv[2:])
+
+		print(f"{helpers.colors.OKCYAN}Downloading latest addons.json file.{helpers.colors.ENDC}")
+		try:
+			addons = self._addons(False)
+			with open(os.path.join(appdirs.user_data_dir("smam"), "addons.json"), "w") as f:
+				json.dump({key: a.dict for key, a in addons.items()}, f, indent=4)
+			print(f"{helpers.colors.OKCYAN}Successfully updated addons.json to the latest version.{helpers.colors.ENDC}")
+		except Exception as e:
+			print(e)
+			print(f"{helpers.colors.FAIL}Failed to download addons.json file.{helpers.colors.ENDC}")
 
 
 def main():
