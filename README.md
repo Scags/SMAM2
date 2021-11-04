@@ -83,13 +83,13 @@ When installing an addon, the default behavior is pulling from the latest databa
 ```json
 {
     "local": false,
-    // You can also change which files are ignored during installation
     "file_exclusions": [
         "*/.*",
         "*.md"
     ]
 }
 ```
+You can also change which files are ignored during installation with "file_exclusions". Default is hidden and Markdown files.
 
 After doing so, SMAM will pull from a/the addons.json in the config directory. If this file does not exist upon running any SMAM command that requires the addons database, it will simply download the latest addons.json, write it to your config directory, and proceed to use that file until you run `smam update`.
 
