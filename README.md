@@ -359,4 +359,5 @@ Addon configuration is as follows:
 
 - Allow complete server deletion.
 - Improve argparse's command structure
+
 ~~Allow local addon database configurations~~ Implemented in V1.1
