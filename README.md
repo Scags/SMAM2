@@ -6,6 +6,12 @@ This was heavily inspired by [Phil25's SMAM](https://github.com/Phil25/SMAM). I 
 
 There is currently not yet a "database" of plugins/extensions. For now, every addon is listed in the GitHub repo in a .json file. If you want to add your project/plugin/extension, just file a pull request.
 
+### [Features](https://github.com/Scags/SMAM2/tree/main#features)
+### [Installation](https://github.com/Scags/SMAM2/tree/main#installation)
+### [Commands](https://github.com/Scags/SMAM2/tree/main#commands)
+### [Adding an Addon](https://github.com/Scags/SMAM2/tree/main#adding-an-addon)
+### [TODO](https://github.com/Scags/SMAM2/tree/main#todo)
+
 # Features #
 
 ## Multiple Server Management ##
@@ -352,5 +358,5 @@ Addon configuration is as follows:
 # TODO
 
 - Allow complete server deletion.
-- ~~Allow local addon database configurations~~ Implemented in V1.1
 - Improve argparse's command structure
+~~Allow local addon database configurations~~ Implemented in V1.1
