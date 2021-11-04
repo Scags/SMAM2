@@ -6,11 +6,11 @@ This was heavily inspired by [Phil25's SMAM](https://github.com/Phil25/SMAM). I 
 
 There is currently not yet a "database" of plugins/extensions. For now, every addon is listed in the GitHub repo in a .json file. If you want to add your project/plugin/extension, just file a pull request.
 
-### [Features](https://github.com/Scags/SMAM2/tree/main#features)
-### [Installation](https://github.com/Scags/SMAM2/tree/main#installation)
-### [Commands](https://github.com/Scags/SMAM2/tree/main#commands)
-### [Adding an Addon](https://github.com/Scags/SMAM2/tree/main#adding-an-addon)
-### [TODO](https://github.com/Scags/SMAM2/tree/main#todo)
+### [Features](https://github.com/Scags/SMAM2#features)
+### [Installation](https://github.com/Scags/SMAM2#installation)
+### [Commands](https://github.com/Scags/SMAM2#commands)
+### [Adding an Addon](https://github.com/Scags/SMAM2#adding-an-addon)
+### [TODO](https://github.com/Scags/SMAM2#todo)
 
 # Features #
 
